@@ -11,9 +11,12 @@ class Favors {
     _items.add(
       FavorItem(
         favor: favor,
-        id: (_items..sort((item1, item2) => item1.id.compareTo(item2.id)))
-            .last
-            .id,
+        id: _items.isEmpty
+            ? 1
+            : ((_items..sort((item1, item2) => item1.id.compareTo(item2.id)))
+                    .last
+                    .id +
+                1),
       ),
     );
   }

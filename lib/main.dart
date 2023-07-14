@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:koffavor/providers/favors_notifier.dart';
 import 'package:koffavor/screens/home_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => FavorsNotifier(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

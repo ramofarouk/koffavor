@@ -4,7 +4,7 @@ import 'package:koffavor/models/favor.dart';
 class AcceptationScreen extends StatefulWidget {
   const AcceptationScreen(this.favors, {super.key});
 
-  final List<Favor> favors;
+  final List<FavorItem> favors;
 
   @override
   State<AcceptationScreen> createState() => _AcceptationScreenState();
@@ -16,17 +16,17 @@ class _AcceptationScreenState extends State<AcceptationScreen> {
     return ListView(
       children: widget.favors
           .map(
-            (favor) => Card(
+            (item) => Card(
               child: Column(
                 children: [
                   ListTile(
                     leading: CircleAvatar(
                       backgroundColor:
                           Theme.of(context).colorScheme.inversePrimary,
-                      child: Text(favor.nom),
+                      child: Text(item.favor.nom),
                     ),
-                    title: Text(favor.motif),
-                    subtitle: Text(favor.description),
+                    title: Text(item.favor.motif),
+                    subtitle: Text(item.favor.description),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
