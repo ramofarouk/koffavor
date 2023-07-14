@@ -1,6 +1,6 @@
 # Flutter Workshop Sokode Codelab - KOFFavor
 
-![1689312983693](workshop/promotional_visual.jpg)
+![Affiche Promotionnel](workshop/promotional_visual.jpg)
 
 Application de Gestion de Faveurs.
 
