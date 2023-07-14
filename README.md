@@ -1,16 +1,11 @@
-# koffavor
+# Flutter Workshop Sokode Codelab - KOFFavor
 
-A new Flutter project.
+![1689312983693](workshop/promotional_visual.jpg)
 
-## Getting Started
+Application de Gestion de Faveurs.
 
-This project is a starting point for a Flutter application.
+Le but de ce codelab réalisé à l'IFNTI avec les étudiants de la troisième année est de les initier au développement d'une application mobile avec #Flutter.
 
-A few resources to get you started if this is your first Flutter project:
+En première partie, nous avons réalisé de zéro l'UI de l'application pour mettre en pratique le cours théorique, _Comment réaliser de belles interfaces avec Flutter_.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+En seconde partie nous avons ajouté, deux systèmes de gestion d'état (setState, Provider) pour dynamiser notre application.
