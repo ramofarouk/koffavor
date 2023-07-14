@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:koffavor/models/favor.dart';
 
 class AddFavorScreen extends StatefulWidget {
   const AddFavorScreen({super.key});
@@ -8,19 +9,27 @@ class AddFavorScreen extends StatefulWidget {
 }
 
 class _AddFavorScreenState extends State<AddFavorScreen> {
+  String nom = '';
+  TextEditingController motif = TextEditingController();
+  TextEditingController description = TextEditingController();
+  DateTime creneau = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          foregroundColor: Colors.white,
-          title: const Text(
-            "Ajouter une faveur",
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        foregroundColor: Colors.white,
+        title: const Text(
+          "Ajouter une faveur",
+        ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(25),
+            bottomRight: Radius.circular(25),
           ),
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(25),
-                  bottomRight: Radius.circular(25)))),
+        ),
+      ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),
         child: ElevatedButton(
@@ -28,7 +37,17 @@ class _AddFavorScreenState extends State<AddFavorScreen> {
               backgroundColor: Theme.of(context).colorScheme.primary,
               elevation: 6,
               foregroundColor: Colors.white),
-          onPressed: () {},
+          onPressed: () {
+            Favor favor = Favor(
+              nom: nom,
+              motif: motif.text,
+              description: description.text,
+              creneau: creneau,
+              status: 0,
+            );
+
+            Navigator.pop(context, favor);
+          },
           child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [Text("VALIDER"), Icon(Icons.add)]),
@@ -47,12 +66,19 @@ class _AddFavorScreenState extends State<AddFavorScreen> {
                         child: Text(e),
                       ))
                   .toList(),
-              onChanged: (String? value) {},
+              onChanged: (String? value) {
+                if (value != null) {
+                  setState(() {
+                    nom = value;
+                  });
+                }
+              },
             ),
             const SizedBox(
               height: 10,
             ),
             TextFormField(
+              controller: motif,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(), hintText: "Taper le motif"),
             ),
@@ -60,6 +86,7 @@ class _AddFavorScreenState extends State<AddFavorScreen> {
               height: 10,
             ),
             TextFormField(
+              controller: description,
               maxLines: 4,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
@@ -69,12 +96,24 @@ class _AddFavorScreenState extends State<AddFavorScreen> {
               height: 10,
             ),
             TextFormField(
-              onTap: () {
-                showDatePicker(
-                    context: context,
-                    firstDate: DateTime.now(),
-                    initialDate: DateTime.now(),
-                    lastDate: DateTime(2050, 12, 31));
+              controller: TextEditingController(
+                text: creneau.toString(),
+              ),
+              onTap: () async {
+                DateTime? date = await showDatePicker(
+                  context: context,
+                  firstDate: DateTime.now(),
+                  initialDate: DateTime.now(),
+                  lastDate: DateTime(2050, 12, 31),
+                );
+
+                debugPrint(date.toString());
+
+                if (date != null) {
+                  setState(() {
+                    creneau = date;
+                  });
+                }
               },
               readOnly: true,
               decoration: const InputDecoration(

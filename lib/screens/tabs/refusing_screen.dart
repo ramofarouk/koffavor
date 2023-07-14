@@ -2,39 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:koffavor/models/favor.dart';
 
 class RefusingScreen extends StatefulWidget {
-  const RefusingScreen({super.key});
+  const RefusingScreen(this.favors, {super.key});
+
+  final List<Favor> favors;
 
   @override
   State<RefusingScreen> createState() => _RefusingScreenState();
 }
 
 class _RefusingScreenState extends State<RefusingScreen> {
-  List<Favor> listFavors = [];
-
-  @override
-  void initState() {
-    listFavors.add(Favor(
-        creneau: DateTime.now(),
-        description:
-            'J\'ai besoin urgemment d\'argent pour des raisons de santé.',
-        motif: 'Besoin d\'argent',
-        nom: 'Omar',
-        status: 1));
-    listFavors.add(Favor(
-        creneau: DateTime.now(),
-        description:
-            'Je prépare un exam et je veux que tu me passes ton ebook sur PHP.',
-        motif: 'Prêt de document',
-        nom: 'Farouk',
-        status: 1));
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemBuilder: (BuildContext context, int index) {
-        Favor favor = listFavors[index];
+        Favor favor = widget.favors[index];
         return Card(
           child: ListTile(
             leading: CircleAvatar(
@@ -46,7 +27,7 @@ class _RefusingScreenState extends State<RefusingScreen> {
           ),
         );
       },
-      itemCount: listFavors.length,
+      itemCount: widget.favors.length,
     );
   }
 }

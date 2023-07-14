@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:koffavor/models/favor.dart';
 import 'package:koffavor/screens/add_favor_screen.dart';
 
 import 'tabs/acceptation_screen.dart';
@@ -13,6 +14,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final List<Favor> _favors = [];
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -47,23 +50,31 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(25),
                       bottomRight: Radius.circular(25)))),
-          body: const Padding(
-            padding: EdgeInsets.all(8),
+          body: Padding(
+            padding: const EdgeInsets.all(8),
             child: TabBarView(
               children: [
-                WaitingScreen(),
-                AcceptationScreen(),
-                RefusingScreen()
+                WaitingScreen(_favors),
+                AcceptationScreen(_favors),
+                RefusingScreen(_favors)
               ],
             ),
           ),
           floatingActionButton: FloatingActionButton(
             backgroundColor: Theme.of(context).colorScheme.primary,
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (BuildContext context) {
-                return const AddFavorScreen();
-              }));
+            onPressed: () async {
+              Favor? favor = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return const AddFavorScreen();
+                  },
+                ),
+              );
+
+              if (favor != null) {
+                _favors.add(favor);
+              }
             },
             child: const Icon(
               Icons.add,
