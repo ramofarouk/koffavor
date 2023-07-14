@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:koffavor/models/favor.dart';
 
 class AcceptationScreen extends StatefulWidget {
-  const AcceptationScreen({super.key});
+  const AcceptationScreen(this.favors, {super.key});
+
+  final List<Favor> favors;
 
   @override
   State<AcceptationScreen> createState() => _AcceptationScreenState();
@@ -13,20 +15,26 @@ class _AcceptationScreenState extends State<AcceptationScreen> {
 
   @override
   void initState() {
-    listFavors.add(Favor(
+    listFavors.add(
+      Favor(
         creneau: DateTime.now(),
         description:
             'J\'ai besoin urgemment d\'argent pour des raisons de santé.',
         motif: 'Besoin d\'argent',
         nom: 'Omar',
-        status: 1));
-    listFavors.add(Favor(
+        status: 1,
+      ),
+    );
+    listFavors.add(
+      Favor(
         creneau: DateTime.now(),
         description:
             'Je prépare un exam et je veux que tu me passes ton ebook sur PHP.',
         motif: 'Prêt de document',
         nom: 'Farouk',
-        status: 1));
+        status: 1,
+      ),
+    );
     super.initState();
   }
 
