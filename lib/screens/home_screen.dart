@@ -25,6 +25,23 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Consumer<FavorsNotifier>(
       builder: (context, favors, child) {
+        List<FavorItem> waitingFavors = favors.items
+            .where(
+              (item) => item.favor.status == FavorStatus.waiting,
+            )
+            .toList();
+
+        List<FavorItem> rejectedFavors = favors.items
+            .where(
+              (item) => item.favor.status == FavorStatus.rejected,
+            )
+            .toList();
+
+        List<FavorItem> acceptedFavors = favors.items
+            .where(
+              (item) => item.favor.status == FavorStatus.accepted,
+            )
+            .toList();
         return DefaultTabController(
           initialIndex: 0,
           length: 3,
@@ -39,18 +56,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontSize: 25),
                 ),
                 centerTitle: true,
-                bottom: const TabBar(
+                bottom: TabBar(
                     labelColor: Colors.white,
                     unselectedLabelColor: Colors.white38,
                     tabs: [
                       Tab(
-                        text: "En attente",
+                        text: "En attente (${waitingFavors.length})",
                       ),
                       Tab(
-                        text: "Acceptation",
+                        text: "Acceptés (${acceptedFavors.length})",
                       ),
                       Tab(
-                        text: "Refus",
+                        text: "Refusés (${rejectedFavors.length})",
                       )
                     ]),
                 shape: const RoundedRectangleBorder(
@@ -61,27 +78,9 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.all(8),
               child: TabBarView(
                 children: [
-                  WaitingScreen(
-                    favors.items
-                        .where(
-                          (item) => item.favor.status == FavorStatus.waiting,
-                        )
-                        .toList(),
-                  ),
-                  AcceptationScreen(
-                    favors.items
-                        .where(
-                          (item) => item.favor.status == FavorStatus.accepted,
-                        )
-                        .toList(),
-                  ),
-                  RefusingScreen(
-                    favors.items
-                        .where(
-                          (item) => item.favor.status == FavorStatus.rejected,
-                        )
-                        .toList(),
-                  ),
+                  WaitingScreen(waitingFavors),
+                  AcceptationScreen(acceptedFavors),
+                  RefusingScreen(rejectedFavors),
                 ],
               ),
             ),

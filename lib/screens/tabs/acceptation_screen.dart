@@ -17,44 +17,18 @@ class _AcceptationScreenState extends State<AcceptationScreen> {
       children: widget.favors
           .map(
             (item) => Card(
+              color: Colors.green[100],
               child: Column(
                 children: [
                   ListTile(
                     leading: CircleAvatar(
                       backgroundColor:
                           Theme.of(context).colorScheme.inversePrimary,
-                      child: Text(item.favor.nom),
+                      child: Text(item.favor.nom[0]),
                     ),
                     title: Text(item.favor.motif),
                     subtitle: Text(item.favor.description),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      IconButton(
-                        color: Colors.white,
-                        style: IconButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          backgroundColor: Colors.green.shade800,
-                        ),
-                        icon: const Icon(Icons.check),
-                        onPressed: () {},
-                      ),
-                      IconButton(
-                        color: Colors.white,
-                        style: IconButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          backgroundColor: Colors.red.shade800,
-                        ),
-                        icon: const Icon(Icons.delete),
-                        onPressed: () {},
-                      )
-                    ],
-                  )
                 ],
               ),
             ),
