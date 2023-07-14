@@ -1,4 +1,4 @@
-/* import 'favor.dart';
+import 'favor.dart';
 
 class Favors {
   Favors(this._items);
@@ -23,4 +23,3 @@ class Favors {
     _items.add(FavorItem(favor: favor, id: id));
   }
 }
- */

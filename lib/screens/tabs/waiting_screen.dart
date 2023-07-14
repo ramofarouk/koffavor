@@ -28,7 +28,7 @@ class _WaitingScreenState extends State<WaitingScreen> {
                     leading: CircleAvatar(
                       backgroundColor:
                           Theme.of(context).colorScheme.inversePrimary,
-                      child: Text(favor.nom),
+                      child: Text(favor.nom[0]),
                     ),
                     title: Text(favor.motif),
                     subtitle: Text(favor.description),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:koffavor/models/favor.dart';
 import 'package:koffavor/utils/extensions/context.dart';
 
@@ -29,7 +30,6 @@ class _AddFavorScreenState extends State<AddFavorScreen> {
         motif: _motifController.text,
         description: _descriptionController.text,
         creneau: _creneau,
-        status: 0,
       );
 
       //Wait 5 seconds
@@ -63,25 +63,25 @@ class _AddFavorScreenState extends State<AddFavorScreen> {
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            elevation: 6,
-            foregroundColor: Colors.white,
-          ),
-          onPressed: _save,
-          child: _saving
-              ? const Center(
-                  child: CircularProgressIndicator(),
-                )
-              : const Row(
+        child: _saving
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  elevation: 6,
+                  foregroundColor: Colors.white,
+                ),
+                onPressed: _save,
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("VALIDER"),
                     Icon(Icons.add),
                   ],
                 ),
-        ),
+              ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -131,6 +131,10 @@ class _AddFavorScreenState extends State<AddFavorScreen> {
                 height: 10,
               ),
               TextFormField(
+                controller: TextEditingController(
+                  //text: DateFormat("yyyy/MM/dd").format(_creneau),
+                  text: DateFormat("EEE, d MMMM, yyyy").format(_creneau),
+                ),
                 onTap: () async {
                   DateTime? date = (await showDatePicker(
                     context: context,

@@ -7,8 +7,6 @@ import 'tabs/acceptation_screen.dart';
 import 'tabs/refusing_screen.dart';
 import 'tabs/waiting_screen.dart';
 
-List<Favor> _favors = [];
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -17,8 +15,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final List<Favor> _favors = [];
+
   Future<void> _addNewFavor(Favor favor) async {
-    _favors.add(favor);
+    setState(() {
+      _favors.add(favor);
+    });
   }
 
   Future<void> _goToAddScreen() async {
